@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load base_extra %}
+{% block title %}Registration{% endblock %}
+{% block content %}
+<div class="container mt-150">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+      <div class="panel panel-default">                    
+        <div class="panel-heading">
+          <strong>Registration</strong>
+        </div>
+        <div class="panel-body">
+          <form action="{% url 'userapp:register' %}" method="POST">
+            {% csrf_token %}
+            <fieldset>
+              <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                  {% for field in form %}
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-{{ field.name|glyphicon_tags }}"></i>
+                        </span>
+                        {{ field }}
+                      </div>
+                      {% if field.errors %}
+                        {{ field.errors }}
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                  <div class="form-group">
+                    <input type="submit" class="btn btn-lg btn-info btn-block" value="Sign up">
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load base_extra %}
+{% block title %}Book details{% endblock %}
+{% block content %}
+<div class="container mt-100">
+  <p class="h1 text-center">{{ book.name}}</p>
+  <div class="row is-table-row">
+    <div class="col-md-4 col-sm-4 well">
+      <span class="glyphicon glyphicon-user"></span>
+      <a target="_blank" class="blue-link" href="{% url 'bookapp:bookslist' %}?search={{ book.user.last_name }}+{{ book.user.first_name }}">{{ book.user.last_name }} {{ book.user.first_name }}</a> / <a target="_blank" class="blue-link" href="{% url 'bookapp:book' %}?search={{ book.name }}">{{ book.name }}</a>
+    </div>
+    <div class="col-md-4 col-sm-4 well">
+      <span class="glyphicon glyphicon-calendar"></span>{{ book.date_added|date:"d M Y" }}
+    </div>
+  </div>
+  <div class="row is-table-row">
+    <div class="col-md-9 well">
+      <h6>Description:</h6>
+      {% if book.description %}
+        {{ book.description }}
+      {% else %}
+        Not exist
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
