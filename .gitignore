@@ -2,3 +2,5 @@
 *.pyc
 *.sqlite3
 /.idea
+/bookinfo/settings_local.py
+/static/media

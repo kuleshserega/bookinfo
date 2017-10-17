@@ -11,16 +11,15 @@ from userapp.forms import EmailAuthenticationForm
 class LoginView(FormView):
     form_class = EmailAuthenticationForm
     template_name = "login.html"
-    success_url = "/bookslist"
+    success_url = "/profile"
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            return HttpResponseRedirect('/bookslist')
+            return HttpResponseRedirect('/profile')
         else:
-            return super(LoginFormView, self).dispatch(
+            return super(LoginView, self).dispatch(
                 request, *args, **kwargs)
 
     def form_valid(self, form):
         login(self.request, form.get_user())
-        return super(LoginFormView, self).form_valid(form)
-
+        return super(LoginView, self).form_valid(form)

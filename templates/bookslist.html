@@ -7,7 +7,7 @@
   <div class="row is-table-row">
     <div class="col-md-4 col-sm-4 well">
       <span class="glyphicon glyphicon-user"></span>
-      <a target="_blank" class="blue-link" href="{% url 'bookapp:bookslist' %}?search={{ book.user.last_name }}+{{ book.user.first_name }}">{{ book.user.last_name }} {{ book.user.first_name }}</a> / <a target="_blank" class="blue-link" href="{% url 'bookapp:book' %}?search={{ book.name }}">{{ book.name }}</a>
+      <a target="_blank" class="blue-link" href="{% url 'bookapp:books_list' %}?search={{ book.user.last_name }}+{{ book.user.first_name }}">{{ book.user.last_name }} {{ book.user.first_name }}</a> / <a target="_blank" class="blue-link" href="{% url 'bookapp:book' %}?search={{ book.name }}">{{ book.name }}</a>
     </div>
     <div class="col-md-4 col-sm-4 well">
       <span class="glyphicon glyphicon-calendar"></span>{{ book.date_added|date:"d M Y" }}

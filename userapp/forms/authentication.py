@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import collections
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -21,7 +22,7 @@ class EmailAuthenticationForm(AuthenticationForm):
             fields[key] = self.fields.pop(key)
         self.fields = fields
 
-        for field in self.fields.itervalues():
+        for field in self.fields.values():
             field.widget.attrs.update({
                 'class': 'form-control',
                 'placeholder': field.label,

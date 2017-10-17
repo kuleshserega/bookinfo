@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect
 
@@ -11,11 +14,11 @@ class RegisterView(FormView):
 
     def form_valid(self, form):
         form.save()
-        return super(RegisterFormView, self).form_valid(form)
+        return super(RegisterView, self).form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated():
             return HttpResponseRedirect('/bookslist')
         else:
-            return super(RegisterFormView, self).dispatch(
+            return super(RegisterView, self).dispatch(
                 request, *args, **kwargs)

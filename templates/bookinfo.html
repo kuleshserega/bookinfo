@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load base_extra %}
+{% block title %} Profile details {% endblock %}
+{% block content %}
+<div class="container mt-100">
+  <p class="h1 text-center">Book info</p>
+  <div class="row is-table-row">
+    <div class="col-md-8 well">
+      <h6>Books:</h6>
+      {% if books %}
+        {% for book in books %}
+          <h3><strong>Book name: </strong>{{ book.name }}</h3>
+          <i><strong>Description: </strong>{{ book.description }}</i>
+        {% endfor %}
+      {% else %}
+        Not exists
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

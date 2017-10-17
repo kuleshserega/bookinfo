@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load base_extra %}
+{% block title %} Profile details {% endblock %}
+{% block content %}
+<div class="container mt-100">
+  <p class="h1 text-center">Profile details</p>
+  <div class="row is-table-row">
+    <div class="col-md-4 col-sm-4 well">
+      {% if request.user %}
+        {% if profile_picture %}
+          <img src="/{{ profile_picture }}" height="30"/>
+        {% else %}
+          <span class="glyphicon glyphicon-user"></span>
+        {% endif %}
+        {{ request.user.last_name }} {{ request.user.first_name }}
+      {% endif %}
+    </div>
+    <div class="col-md-4 col-sm-4 well">
+      <span class="glyphicon glyphicon-envelope"></span>{{ request.user.email }}
+    </div>
+  </div>
+  <div class="row is-table-row">
+    <div class="col-md-8 well">
+      <h6>Books:</h6>
+      {% if books %}
+        {% for book in books %}
+          <h3><strong>Book name: </strong>{{ book.name }}</h3>
+          <i><strong>Description: </strong>{{ book.description }}</i>
+        {% endfor %}
+      {% else %}
+        Entries not exists
+      {% endif %}
+      <br/>
+      <a class="btn btn-success btn-lg" href="{% url 'bookapp:book_upload' %}">Upload new book</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

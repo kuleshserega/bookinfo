@@ -4,7 +4,8 @@ from bookapp import views
 
 
 urlpatterns = [
-    url(r'^$', views.BookView.as_view(), name='index'),
-    url(r'^list/$', views.BooksListView.as_view(), name='book_list'),
+    url(r'^list/$', views.BooksListView.as_view(), name='books_list'),
+    url(r'^upload/$', views.BookUploadView.as_view(), name='book_upload'),
+    url(r'^(?P<pk>\d+)/$', views.BookView.as_view(), name='book'),
     # url(r'^file/(?P<pk>\d+)/$', views.get_file, name='download_book'),
 ]
