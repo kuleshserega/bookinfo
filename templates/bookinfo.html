@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load base_extra %}
+{% load base_extra staticfiles %}
 {% block title %} Profile details {% endblock %}
 {% block content %}
 <div class="container mt-100">
@@ -24,7 +24,12 @@
         <h6>Comments</h6>
         {% for comment in comments %}
           <div class="w-100 well">
-            <div class="book-cover-block"><img src="/{{ comment.who_added.profile.avatar }}" height="100" /></div>
+            <div class="book-cover-block">
+              {% if comment.who_added.profile.avatar %}
+                <img src="/{{ comment.who_added.profile.avatar }}" height="100" /></div>
+              {% else %}
+                <img src="{% static 'img/no-image.png' %}" height="100" /></div>
+              {% endif %}
             <div class="book-info-block">
               <strong>Author: </strong>{{ comment.who_added.last_name }} {{ comment.who_added.first_name }}<br/>
               <strong>Comment: </strong>{{ comment.text }}<br/>
