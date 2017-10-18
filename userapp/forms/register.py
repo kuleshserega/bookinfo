@@ -28,7 +28,7 @@ class RegisterForm(UserCreationForm):
             })
 
         self.fields['avatar'].widget.attrs.update({
-            'class': 'form-control reigister-form-file-input',
+            'class': 'form-control form-file-input',
             'title': 'Choose your photo'
         })
 
@@ -56,6 +56,7 @@ class RegisterForm(UserCreationForm):
         user.username = '%s %s (%s)' % (
             user.first_name, user.last_name, user.email)
         user.save()
+
         user_profile = UserProfile(
             user=user, avatar=self.cleaned_data['avatar'])
         user_profile.save()

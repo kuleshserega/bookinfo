@@ -3,4 +3,11 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-# Register your models here.
+from bookapp.models import Book, Comment
+from userapp.forms import EmailAuthenticationForm
+
+
+admin.site.register(Book)
+admin.site.register(Comment)
+admin.site.login_form = EmailAuthenticationForm
+admin.site.login_template = 'admin_login.html'

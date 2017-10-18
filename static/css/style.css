@@ -246,7 +246,31 @@ i.glyphicon, span.glyphicon {
     height: auto;
 }
 
-.reigister-form-file-input {
+.form-file-input {
     height: 100%!important;
     padding-left: 3px!important;
+}
+
+.book-cover-block {
+    width: 25%;
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-right {
+    float: right;
+}
+
+.top-buffer {
+    margin-top:10px;
+}
+
+.book-info-block{
+    width: 70%;
+    padding-left: 5%;
+    text-align: justify;
+    float: left;
 }

@@ -3,18 +3,42 @@
 {% block title %} Profile details {% endblock %}
 {% block content %}
 <div class="container mt-100">
-  <p class="h1 text-center">Book info</p>
+  <p class="h1 text-center">Book info and comments</p>
   <div class="row is-table-row">
     <div class="col-md-8 well">
-      <h6>Books:</h6>
-      {% if books %}
-        {% for book in books %}
-          <h3><strong>Book name: </strong>{{ book.name }}</h3>
-          <i><strong>Description: </strong>{{ book.description }}</i>
-        {% endfor %}
+      {% if book %}
+        <h6>{{ book.name }}</h6>
+        <div class="w-100 well">
+          <div class="book-cover-block"><img src="/{{ book.cover }}" height="300" /></div>
+          <div class="book-info-block">
+            <strong>Author: </strong>{{ book.author }}<br/>
+            <strong>Description: </strong>{{ book.description }}<br/>
+            <strong>Added</strong> by <strong>{{ book.owner.last_name }} {{ book.owner.first_name }}: </strong>{{ book.date_added }}
+          </div>
+          <div class="clear"></div>
+        </div>
       {% else %}
-        Not exists
+        Book is not exists
       {% endif %}
+      {% if comments %}
+        <h6>Comments</h6>
+        {% for comment in comments %}
+          <div class="w-100 well">
+            <div class="book-cover-block"><img src="/{{ comment.who_added.profile.avatar }}" height="100" /></div>
+            <div class="book-info-block">
+              <strong>Author: </strong>{{ comment.who_added.last_name }} {{ comment.who_added.first_name }}<br/>
+              <strong>Comment: </strong>{{ comment.text }}<br/>
+              <strong>Date added: </strong>{{ comment.date_added }}
+            </div>
+            <div class="clear"></div>
+          </div>
+        {% endfor%}
+      {% endif %}
+      <form action="{% url 'bookapp:bookinfo' book.id %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-lg btn-success w-25 float-right top-buffer" value="Add comment" />
+      </form>
     </div>
   </div>
 </div>

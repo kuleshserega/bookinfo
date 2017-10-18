@@ -1,25 +1,42 @@
 {% extends "base.html" %}
-{% load base_extra %}
+{% load base_extra staticfiles %}
 {% block title %}Book details{% endblock %}
 {% block content %}
 <div class="container mt-100">
-  <p class="h1 text-center">{{ book.name}}</p>
+  <p class="h1 text-center">All Books</p>
   <div class="row is-table-row">
-    <div class="col-md-4 col-sm-4 well">
-      <span class="glyphicon glyphicon-user"></span>
-      <a target="_blank" class="blue-link" href="{% url 'bookapp:books_list' %}?search={{ book.user.last_name }}+{{ book.user.first_name }}">{{ book.user.last_name }} {{ book.user.first_name }}</a> / <a target="_blank" class="blue-link" href="{% url 'bookapp:book' %}?search={{ book.name }}">{{ book.name }}</a>
-    </div>
-    <div class="col-md-4 col-sm-4 well">
-      <span class="glyphicon glyphicon-calendar"></span>{{ book.date_added|date:"d M Y" }}
-    </div>
-  </div>
-  <div class="row is-table-row">
-    <div class="col-md-9 well">
-      <h6>Description:</h6>
-      {% if book.description %}
-        {{ book.description }}
+    <div class="col-md-12 well">
+      {% if books %}
+        {% for book in books %}
+          <div class="w-100 well" style="display: block">
+            <div class="book-cover-block"><a href="{% url 'bookapp:bookinfo' book.id %}"><img src="/{{ book.cover }}" height="300" /></a></div>
+            <div class="book-info-block">
+              <strong>Author: </strong>{{ book.author }}<br/>
+              <strong>Book name: </strong>{{ book.name }}<br/>
+              <strong>Description: </strong>{{ book.description }}<br/>
+              <strong>Added</strong> by <strong>{{ book.owner.last_name }} {{ book.owner.first_name }}: </strong>{{ book.date_added }}
+            </div>
+            <div class="clear"></div>
+          </div>
+        {% endfor %}
       {% else %}
         Not exist
+        Entries not exists
+      {% endif %}
+      {% if is_paginated %}
+        <div class="pagination">
+          <span class="page-links">
+            {% if page_obj.has_previous %}
+              <a href="/book/list?page={{ page_obj.previous_page_number }}"><img src="{% static 'img/left_arrow.jpeg' %}" height="25"/></a>
+            {% endif %}
+            <span class="page-current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+              <a href="/book/list?page={{ page_obj.next_page_number }}"><img src="{% static 'img/right_arrow.png' %}" height="25"/></a>
+            {% endif %}
+          </span>
+        </div>
       {% endif %}
     </div>
   </div>

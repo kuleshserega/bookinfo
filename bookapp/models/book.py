@@ -11,6 +11,9 @@ class Book(models.Model):
     author = models.CharField(max_length=120, verbose_name=_('Author name'))
     description = models.TextField(verbose_name=_('Book description'))
     date_added = models.DateField(verbose_name=_('Date added'))
+    cover = models.ImageField(
+        upload_to='static/media/images/covers/',
+        null=True, blank=True, verbose_name=_('Book cover picture'))
     owner = models.ForeignKey(User, verbose_name=_('Who added book'))
 
     def __str__(self):

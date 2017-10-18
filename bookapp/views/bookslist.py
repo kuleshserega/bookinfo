@@ -9,8 +9,10 @@ from bookapp.models.book import Book
 
 class BooksListView(ListView):
     model = Book
-    context_object_name = 'bookslist'
+    context_object_name = 'books'
     template_name = 'bookslist.html'
+    paginate_by = 5
+    ordering = '-id'
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:

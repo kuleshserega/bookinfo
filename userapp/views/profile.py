@@ -20,6 +20,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         except UserProfile.DoesNotExist:
             context['profile_picture'] = None
 
-        context['user_books'] = Book.objects.filter(owner=self.request.user)
+        context['books'] = Book.objects.filter(owner=self.request.user)
 
         return context

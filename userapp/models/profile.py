@@ -11,4 +11,5 @@ class UserProfile(models.Model):
         upload_to='static/media/images/avatars/',
         null=True, blank=True, verbose_name=_('User profile image'))
     user = models.OneToOneField(
-        User, verbose_name=_('User entity'), on_delete=models.CASCADE)
+        User, related_name='profile',
+        verbose_name=_('User entity'), on_delete=models.CASCADE)
